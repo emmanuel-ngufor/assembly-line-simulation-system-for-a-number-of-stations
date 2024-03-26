@@ -1,0 +1,23 @@
+
+To begin, I have to say this project was way shorter as compared to the previous projects I have completed in IPC144 and OOP244.
+
+General Overview
+================
+A general overview of the project from my perspective helped me understand a lot more about the Standard Template Library in C++.
+Unlike manual loops, it provided me with a more faster and efficient way to deal with containers that can store any kind of data.
+The design and structure of the project was properly done and easy to follow.
+
+Topics covered and Lessons learned
+==================================
+
+
+
+Challenges
+==========
+
+
+
+
+Looking Forward
+===============
+
