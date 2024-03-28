@@ -1,0 +1,32 @@
+1. Usage of Binary Files:
+
+In this workshop, binary files were used for both writing and reading serialized data efficiently.
+When writing to a binary file, data is stored in its raw binary format, which is more compact and faster to read/write compared to text files.
+For example, in the TreasureMap class, the enscribe function writes the map data to a binary file, including the number of rows, column size, and each row of the map.
+The process of using binary files involves opening the file in binary mode (std::ios::binary), and then using fstream::write to write raw data directly to the file.
+
+2. Importance of Function Binding:
+
+Function binding allows us to create function objects that encapsulate a function and its arguments.
+In this workshop, function binding was crucial for passing member functions with additional arguments to thread constructors.
+For example, in the findTreasure function, we needed to pass the digForTreasure function along with its arguments (specifically, a reference to the TreasureMap instance and the character mark) to each thread. This was achieved using std::bind.
+Function binding provides flexibility by allowing us to fix certain arguments of a function while leaving others open for customization, making code more modular and reusable.
+
+3. Advantages of Using Multiple Threads:
+
+Multi-threading allows programs to perform multiple tasks concurrently, thereby improving performance and responsiveness.
+In this workshop, multi-threading was employed to parallelize the search for treasure in the TreasureMap class, resulting in faster execution times, especially for large maps.
+By dividing the map data into partitions and assigning each partition to a separate thread, we were able to leverage the processing power of multiple CPU cores simultaneously.
+The use of multiple threads is particularly beneficial for tasks that are CPU-bound or involve I/O operations, as it maximizes resource utilization and minimizes idle time.
+
+4. Futures and Packaged_Tasks:
+
+Futures and packaged_tasks are components of the C++ standard library that facilitate asynchronous programming and task parallelism.
+In this workshop, futures were used to retrieve the results of asynchronous tasks (e.g., counting treasure) performed by individual threads.
+Packaged_tasks were used to package functions and their arguments into asynchronous tasks that can be executed by threads.
+The relationship between futures and packaged_tasks lies in their coordination to execute and retrieve the results of asynchronous operations. A packaged_task is associated with a future, which holds the eventual result of the task.
+For example, in the findTreasure function, each thread executes a packaged_task representing the digForTreasure function, and the results are stored in futures. These futures are then used to retrieve the individual counts of treasure found by each thread, which are subsequently summed up to obtain the total count.
+Challenges Faced:
+
+One challenge I encountered was correctly passing member functions with additional arguments to thread constructors using std::bind. This required careful consideration of argument types and proper usage of placeholders.
+To ov
