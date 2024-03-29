@@ -29,4 +29,4 @@ For example, in the findTreasure function, each thread executes a packaged_task 
 Challenges Faced:
 
 One challenge I encountered was correctly passing member functions with additional arguments to thread constructors using std::bind. This required careful consideration of argument types and proper usage of placeholders.
-To ov
+To overcome this challenge, I referred to documentation and examples to ensure the correct syntax and usage of std::bind. Additionally, I utilized lambda functions as an alternative approach for passing member functions with captures.
