@@ -1,0 +1,32 @@
+General Overview
+================
+To begin, I would like to say thanks to my Professor : Masood Khan Patel, you were a great teacher and always very helpful.
+Although this project was not lengthy as compared to the projects of IPC144 AND OOP244, It required a great deal of technical knowledge 
+and patience. I spent several nights wondering why my code is not working the way it should. From countless Youtube videos to several AI tools 
+to help me analyse and debug, I am so happy I am done with the project. It was quite tedious and time consuming. Hope this prepares me 
+for real world.
+
+
+Topics covered and Lessons learned
+==================================
+Overview of C++, Building Blocks of C++, Compilation and Execution
+Types: Fundamental types, Pointers, references and Arrays, Classes and Scoped Enumerations
+Class Relationships : Inheritance and Inclusion Polymorphism, Class Templates, Compositions, Aggregations and Associations
+Processing : Expressions, Functions and Errror Handling
+Standard Template Library: STL, Containers and Iterations, Algorithms, File Stream Objects
+
+Challenges
+==========
+I faced a lot of challenges in completing this project. With a lot of time invested into debugging, I cannot say I had it easy.
+It all started well witht the Station Module which was good and chilled. Then came the CustomerOrder Module
+Faulty Design: I found myself going back to Milestones 1 and 2 to make changes in order for the  code to work properly. 
+My implementation of the CustomerOrder module was one of the most difficult. Ranging from multiple condtions and loops, it was just messy.
+
+The Workstation and LineManager Module gave me a clearer picture as to how the the whole systems functions. This helped me a lot in 
+visualising some of the aspects and translating it into code.
+
+Looking Forward
+===============
+I look forward to develop my skills in C++ over the break before the Summer Term begins. I am particularly interested in reviewing 
+and learning about the Standard Template Library, Multi-threading and Deeper Details which were not covered in depth during the semester.
+However, there are still many aspects that need explore.
