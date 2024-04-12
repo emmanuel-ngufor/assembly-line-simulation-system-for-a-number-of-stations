@@ -1,0 +1,50 @@
+1. 
+Deallocating Dynamically Allocated Memory in a Vector
+Why Deallocation is Necessary:
+In C++, when we dynamically allocate memory using new, it's our responsibility to release that memory using delete to prevent memory leaks. 
+In the context of a std::vector of pointers (std::vector<seneca::Person*>), each pointer represents an object created with new. 
+If we don't deallocate the memory before the vector is destroyed, the memory won't be freed, leading to memory leaks.
+
+2.
+Return Error Codes:
+Instead of using exceptions, the seneca::buildInstance() function could return an error code indicating the type of error encountered (e.g., unknown type or invalid data).
+The loadData() function would then check the error code and handle each type of error accordingly.
+Example:
+
+int error = seneca::buildInstance(file);
+if (error == UNKNOWN_TYPE)
+{
+    // Handle unknown type error
+}
+else if (error == INVALID_DATA)
+{
+    // Handle invalid data error
+}
+else if (error == NO_ERROR)
+{
+    // Continue processing
+}
+
+3.
+Using Containers of Pointers vs. Objects
+std::listseneca::Person* and std::vectorseneca::Person* vs. std::listseneca::Person and std::vectorseneca::Person:
+The choice between using containers of pointers (std::list<seneca::Person*> and std::vector<seneca::Person*>)
+and containers of objects (std::list<seneca::Person> and std::vector<seneca::Person>) depends on the requirements of the application.
+
+Using Containers of Pointers:
+Efficient for polymorphic behavior (storing derived class objects).
+Allows heterogeneous collections (different types derived from Person).
+Requires manual memory management (deleting objects).
+More suitable when objects have a longer lifetime.
+
+std::vector<seneca::Person*> personsVector;
+Using Containers of Objects:
+Simpler memory management (no need for manual deletion).
+Objects are stored directly, reducing indirection.
+Suitable when polymorphism is not a requirement.
+More straightforward, especially for short-lived objects.
+
+Summary:
+Deallocate dynamically allocated memory in a vector to prevent memory leaks.
+Use exception handling to detect and handle errors during file parsing.
+Choose between containers of pointers and objects based on the application's needs, considering factors like polymorphism and memory management requirements.
