@@ -63,7 +63,7 @@ namespace seneca
                 tmp->m_year = remove_spaces(line.substr(75, 5));
                 tmp->m_length = std::stod(line.substr(80, 5));
                 tmp->m_price = std::stod(line.substr(85, 5));
-                songList.emplace_back(tmp);
+                songList.emplace_back(tmp);  // Constructs and add the new song details extracted within the  vector songList Container
 
             }
 
@@ -96,7 +96,7 @@ namespace seneca
     void SongCollection::display(std::ostream& out) const
     {
         // double totalPlaytime = 0.0;
-        double totalPlaytime = std::accumulate(songList.begin(), songList.end(), 0.0,[](double sum, const Song *song) 
+        double totalPlaytime = std::accumulate(songList.begin(), songList.end(), 0.0,[](double sum, const Song* song) 
         { 
             return sum + song->m_length; 
         });

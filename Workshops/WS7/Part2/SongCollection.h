@@ -1,16 +1,3 @@
-/*=============================================================================================================
- Name: Emmanuel Sahfor Ngufor
- Seneca Student ID: 135801215
- Seneca email: esngufor@myseneca.ca
- Date of completion:  12-03-2024
- Workshop# : WS7 - Part 2 - STL Algorithms
- File : SongCollection.h
-
- I declare that this submission is the result of my own work and I only copied the code that my professor provided
- to complete my workshops and assignments.This submitted piece of work has not been shared with any other student
- or 3rd party content provider.
- ===============================================================================================================*/
-
  #ifndef SENECA_SONGCOLLECTION_H
  #define SENECA_SONGCOLLECTION_H
  #include <string>
