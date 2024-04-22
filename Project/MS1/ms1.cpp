@@ -52,7 +52,7 @@ int main(int argc, char** argv)
 		theItem.display(std::cout, true);
 	std::cout << std::endl << std::endl;
 
-	//Select an object and verify all the functionality it working
+	// Select an object and verify all the functionality it working
 	std::cout << "========================================" << std::endl;
 	std::cout << "=          Manual Validation           =" << std::endl;
 	std::cout << "========================================" << std::endl;
