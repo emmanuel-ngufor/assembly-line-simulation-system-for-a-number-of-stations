@@ -1,0 +1,87 @@
+1. The difference between the implementations/utilizations of a functor and a lambda expression. When is appropriate to use each one?
+
+A functor is a class or struct that overloads the function call operator operator(). 
+In contrast, a lambda expression is an anonymous function defined inline. 
+Both can be used as callable objects, but lambdas are more concise and often preferred for short, one-off functions. 
+Functors provide more flexibility, especially when a state needs to be maintained between function calls.
+
+
+2. The constructor for SpellChecker generates an exception in certain conditions. 
+   How would you change your code to achieve the same result, 
+   but without exceptions (both on the constructor and on the client side)? Compare the two solutions.
+
+In the case of the SpellChecker constructor, instead of throwing an exception, we can return a boolean indicating success or failure.
+On the client side, we can check this boolean and handle the error accordingly.
+SpellChecker(const char* filename) {
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        m_isValid = false;
+        return;
+    }
+
+    for (size_t i = 0; i < MAX_WORDS; ++i) {
+        file >> m_badWords[i] >> m_goodWords[i];
+    }
+
+    file.close();
+    m_isValid = true;
+}
+
+// Client side usage
+SpellChecker spellChecker("file.txt");
+if (!spellChecker.isValid()) {
+    std::cerr << "Error: Bad file name!" << std::endl;
+    // Handle error
+}
+
+
+3. The classes Movie and Book contain almost identical logic in loading data from the file. 
+   How would you redesign the classes in order not to duplicate that logic?
+
+To avoid duplicating logic in the Movie and Book classes, we can create a common base class (or use composition) 
+that encapsulates the shared behavior for loading data from a file. 
+Each specific class (Movie and Book) can then inherit from or contain an instance of this base class.
+class FileLoadable {
+public:
+    static std::string parseDescription(const std::string& input) {
+        // Common logic for parsing description
+        // ...
+    }
+};
+
+class Book : public FileLoadable {
+public:
+    Book(const std::string& strBook) {
+        m_description = parseDescription(strBook);
+    }
+};
+
+class Movie : public FileLoadable {
+public:
+    Movie(const std::string& strMovie) {
+        m_description = parseDescription(strMovie);
+    }
+};
+
+4. The classes Movie and Book are instantiated from the main() function using a custom constructor, 
+   but they also contain a default constructor. Is the default constructor necessary? Could you remove it? Justify your answer.
+
+In the provided classes (Movie and Book), the default constructor is not necessary. 
+If we always initialize instances using the parameterized constructor, you can remove the default constructor to enforce 
+that objects are created with valid initial state.
+class Book {
+public:
+    Book(const std::string& strBook) {
+        // Initialization logic
+    }
+};
+
+class Movie {
+public:
+    Movie(const std::string& strMovie) {
+        // Initialization logic
+    }
+};
+
+Removing the default constructor ensures that instances are created with meaningful data and avoids instances in an invalid state.
+

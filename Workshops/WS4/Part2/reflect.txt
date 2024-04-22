@@ -1,0 +1,60 @@
+1. The difference between the implementations of a composition and an aggregation.
+In my implementation, both the Child and ConfirmOrder classes have an attribute of type const Toy**. 
+The key difference lies in the ownership and responsibility for the lifetime of the Toy objects.
+
+- Composition (Child Class):
+The Child class manages a dynamically allocated array of pointers to Toy objects (const Toy** m_toys). 
+It is in a composition relationship because the Child class is responsible for the creation and destruction of the Toy objects. 
+When a Child object is created or destroyed, it ensures that the associated Toy objects are properly managed.
+- Aggregation (ConfirmOrder Class):
+The ConfirmOrder class, on the other hand, is in an aggregation relationship with the Toy class. 
+It also manages a dynamically allocated array of pointers to Toy objects (const Toy** m_toys), but it does not own the Toy objects. 
+The Toy objects are managed elsewhere, and the ConfirmOrder class is simply holding references to them.
+
+
+2. the difference between the implementations of move and copy functions in a composition and an aggregation.
+- Move Functions (Child Class):
+In the Child class, move functions are implemented using dynamic memory allocation and proper handling of ownership transfer. 
+The move constructor and move assignment operator take ownership of the Toy objects from the source object,
+and the source object is left in a valid but unspecified state. that is
+
+Child::Child(Child&& child) noexcept {
+    // Move ownership of toys
+    m_toys = child.m_toys;
+    child.m_toys = nullptr;
+    // ...
+}
+
+ - Copy Functions (ConfirmOrder Class):
+Since the ConfirmOrder class is in an aggregation relationship with the Toy class, it does not need to manage ownership of the Toy objects.
+Therefore, the copy constructor and copy assignment operator perform a shallow copy of the Toy pointers.
+
+ConfirmOrder::ConfirmOrder(const ConfirmOrder& confirmOrder) {
+    // Shallow copy of Toy pointers
+    m_toys = confirmOrder.m_toys;
+    // ...
+}
+
+3. Usage of Association, Aggregation, and Composition:
+Composition:
+    In the Child class, there is composition with the Toy class. 
+The Child class manages the lifetime of the Toy objects, and their creation and destruction are tightly coupled.
+Aggregation:
+    In the ConfirmOrder class, there is an aggregation with the Toy class. 
+The ConfirmOrder class holds a collection of Toy pointers without managing their lifetime.
+Association:
+    In the Child class, there is an association with the Toy class. 
+The Child class has an array of pointers to Toy objects, representing the association between a child and their toys.
+
+
+Challenges and Solutions:
+Ownership and Lifetime Management:
+Managing the ownership and lifetime of dynamically allocated objects (toys) was a critical aspect. 
+Using proper memory management techniques like dynamic memory allocation and deallocation, along with move semantics, 
+helped ensure correct behavior. I got memory leaks each and every time because I was freeing up the resources of the current object
+instead of the source object
+
+Understanding Relationships:
+Clearly understanding the relationships (association, aggregation, and composition) between classes was crucial. 
+This involved careful analysis of responsibilities and ownership semantics to determine the appropriate relationship for each case.
+I personally feel like the difference is not that clear until you get hands on frequent experience.

@@ -1,0 +1,43 @@
+1. Specializing the add() Member Function in Set
+------------------------------------------------
+Reason for Specializing the add() Member Function:
+In the Set class, the add() function is specialized for two scenarios:
+When the type is Pair: This specialization is necessary because the default equality comparison (operator==) may not be suitable for complex objects like Pair. I created a function to compare two pair objects called 
+bool Pair::haveSameKey(const Pair& A, const Pair& B) 
+{
+    return A.m_key == B.m_key ? true : false;
+}
+
+When the type is double: This specialization is required because comparing floating-point numbers for exact equality can be problematic due to precision issues. Instead, we use a tolerance level (0.01) to determine whether two double values are considered equal. The comparison uses std::fabs to handle positive and negative differences.
+ 
+2. Defining the Class Variable Outside the Class Definition
+-----------------------------------------------------------
+Reason for Defining the Class Variable Outside the Class Definition:
+In the Collection class template, the dummyObject is defined outside the class definition. This is done for the following reasons:
+
+Separation of Declaration and Definition:
+Placing the definition of dummyObject outside the class allows for a clear separation between the declaration in the header file and the definition in the source file. This adheres to the principles of modularization and encapsulation.
+
+Avoiding Multiple Definitions:
+If the class variable were defined inside the class definition in a header file, and that header file was included in multiple translation units, it could lead to multiple definitions of the same variable. Defining it outside prevents this issue.
+
+3. Other Questions in Specifications
+-------------------------------------
+Justifying Private Members in Pair:
+The private members (m_key and m_value) in the Pair class are essential for encapsulation. They allow controlled access to the internal state of a Pair object. Without them, direct access to class variables could lead to unintended modifications, violating the principles of encapsulation. The private members ensure that the internal state is accessed and modified through well-defined public member functions.
+
+
+
+Difficulties and Challenges:
+----------------------------
+Template Specialization:
+Specializing template classes for Pair and double introduced challenges. Ensuring the correct syntax and understanding when and why to specialize was initially challenging.
+Solution: Consulted documentation and sought clarification in forums. Understanding specific use cases for specialization clarified its necessity.
+
+
+Overall conclusion
+------------------
+In completing this workshop, I gained a deeper understanding of template classes, specialization, and the importance of encapsulation.
+Working on the Pair, Collection, and Set modules provided valuable insights into designing flexible and reusable code.
+Understanding the need for specializing the add() member function in the Set class was pivotal. For Pair, the default equality check might not suffice, so custom logic using bool Pair::haveSameKey(const Pair& A, const Pair& B) was implemented.
+For doubles, dealing with precision issues required a specialized add() using a tolerance level.

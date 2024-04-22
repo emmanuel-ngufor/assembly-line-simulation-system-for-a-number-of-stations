@@ -1,0 +1,61 @@
+1. The reason for the significant time difference between the copy and move operations
+	The significant time difference between copy and move operations is related to the fact that a copy operation involves duplicating the data, while a move operation transfers ownership of the data from one object to another without actually copying the underlying data. In my operator= function, when performing a copy operation, I allocate new memory and copy each string individually. This can be time-consuming, especially when dealing with large amounts of data. On the other hand, a move operation transfers ownership of the dynamically allocated array, resulting in a more efficient operation.
+
+
+
+2.Describe approach taken to read the input file (gutenberg_shakespeare) in the StringSet constructor and populate the dynamic array. Is there any way to avoid rereading the file?
+	In order to read the (gutenberg_shakespeare) file, firstly, I included the <fstream> library for processing files, then, I declared an instance of the ifstream class and named it fileReader. I checked to see if the connection was succesfull using the is_open() function and if not i dispalyed a custom error message. I passed the pointer which holds the address to the filename as a parameter to it. After that, in a while loop, I used the getline() function which I passed as parameters the fileReader, a string variable to hold the words and a space as a delimiter and I increased the number of strings variable(m_numStrings) until I reached the end of file. 
+Then I dynamically allocated memory for the new array of strings using the new keyword that is:  m_strings = new std::string[m_numStrings];    
+Then I re-read the file and load the strings into the array by clearing the end-of-file flag  using clear() function that is: fileReader.clear(); 
+I then moved the file pointer to the beginning using seekg() function that is:  fileReader.seekg(0, std::ios::beg); 
+After which I declared a variable called index of size_t data type and populated the dynamic array using the getline() function again but this time recieving as a string the index of the string and incrementing the index variable until I reached the end of the file. Lastly I closed the file using the close() function, that is fileReader.close();
+
+To avoid re-reading the file, we can modify the StringSet constructor to take advantage of move semantics. Instead of allocating memory and copying strings individually, we can move the dynamically allocated array from the temporary object created during the function call. This can significantly improve the performance of the constructor. Here's a modified version: 
+ std::vector<std::string> tempStrings;  // Temporary vector for storing strings
+
+StringSet::StringSet(const char* fileName)
+{
+    // Open the file
+    std::ifstream fileReader(fileName);
+
+    // Check if the file is open
+    if (!fileReader.is_open())
+    {
+        std::cerr << "Error: Unable to open file " << fileName << std::endl;
+        return;
+    }
+    else
+    {
+        std::vector<std::string> tempStrings;  // Temporary vector for storing strings
+
+        // Read lines from the file
+        std::string line;
+        while (std::getline(fileReader, line))
+        {
+            std::istringstream iss(line);
+            std::string word;
+
+            // Read words from the line
+            while (iss >> word)
+            {
+                tempStrings.push_back(std::move(word));
+            }
+        }
+
+        // Move the temporary vector to the member variable
+        m_strings = std::move(tempStrings);
+        m_numStrings = m_strings.size();
+
+        // Close the file
+        fileReader.close();
+    }
+}
+
+This modification uses std::move to efficiently transfer ownership of the tempStrings vector to the m_strings member variable. This approach avoids unnecessary copying and can improve the overall performance.
+
+
+
+3. In the links above to chrono library, you were directed to use a steady_clock to take a timestamp. Do some research and explain the difference between a steady_clock and a system_clock. Are they the same? When should each one be used? 
+	Regarding the std::chrono library, a steady_clock and a system_clock are both clock classes in the C++ standard library, but they serve different purposes.
+std::chrono::steady_clock: This clock provides a monotonic clock that will never be adjusted. It is suitable for measuring durations without being affected by changes to the system time. Use steady_clock when you need accurate and consistent measurements of elapsed time.
+std::chrono::system_clock: This clock represents the system-wide real-time clock. It might be adjusted by the system for daylight saving time or other reasons. Use system_clock when you need wall-clock time and are not concerned about monotonicity.

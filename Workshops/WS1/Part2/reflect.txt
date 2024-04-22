@@ -1,0 +1,16 @@
+Interacting with the Operating system : int main(int argc, char *argv[]); 
+In this workshop, I learn how to interact with the Operating system via Command Line Arguments as seen in the w1_p2.cpp file. The main() function of a C++ program is its entry point to its executable version. This function's return type is an int. This function accepts as its parameters either no information or a set of command-line arguments. The first parameter (argc) in the command-line-arguments version of the main() function receives the number of arguments supplied on the command line from the operating system. This number includes the name of the relocatable file. The second parameter (argv) receives the address of an array of pointers to C-style null-terminated strings. Each pointer holds the address of a string that holds one command-line argument. argv[0] holds the address of the name of the relocatable file. argv[i] holds the address of the C-style null-terminated string that holds the i-th command-line argument.
+
+Internal and External Linkage:
+In my workshop project, I encountered the concepts of internal and external linkage, particularly in the context of variable declarations. Internal linkage is achieved using the static keyword, restricting the variable's visibility to the translation unit where it is declared. For example, in my Event class: static size_t counter;
+This counter variable has internal linkage, and its scope is limited to the translation unit where the Event class is implemented. On the other hand, external linkage allows variables to be shared between translation units. For instance, g_sysClock with external linkage is declared as extern in the header: extern unsigned int g_sysClock{};
+
+Static Variables:
+Static variables, like the counter in the Event class, retain their values across different instances of the class. They are initialized once and shared among all instances. This proves useful when maintaining a count of created objects, as demonstrated in the display function:
+
+Challenges Faced and Solutions:
+I had difficulties in implementing the formating for the time to be displayed as HH:MM:SS. I solved this by creating a class function called formatTime which recieves the timeInSeconds and performs the mathematical calculations to get the hours, minutes and seconds by making use of the modulus (%) operator which evaluates to the remainder after division.
+
+I had difficulties in implementing the rule of 5, as modern C++ requires, the rule of 3 (Destructor, Copy Constructor and Assignment Operators) were okay since I did study them last semester but the Move Constructor and Move Assignment operator were easy to implement but difficult to grasp the concept of why ? I had to refer to my notes
+
+Also, I encountered an exception error during compilation on Visual Studio about the Move Constructor and Move Assignment operators having to defined noexcept. Meaning they should not throw any exceptions which helps in optimization.

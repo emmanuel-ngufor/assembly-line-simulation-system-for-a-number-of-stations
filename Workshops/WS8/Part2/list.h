@@ -32,20 +32,22 @@ namespace seneca
         }
         size_t size() const { return list.size(); }
         const T &operator[](size_t i) const { return list[i]; }
-
-        // TODO: Overload the += operator with a smart pointer
+  
+        
+        // TODO: Overload the += operator with a raw pointer
         //       as a second operand.
         void operator+=(T *t)
         {
             list.emplace_back(*t);
         }
 
-        // TODO: Overload the += operator with a raw pointer
+        // TODO: Overload the += operator with a smart pointer
         //       as a second operand.
         void operator+=(std::unique_ptr<T> &t)
         {
             list.emplace_back(*t.get());
         }
+
 
         void display(std::ostream &os) const
         {
